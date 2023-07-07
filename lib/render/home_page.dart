@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfile/pages/MyRecipeBookPages/add_recipe_page.dart';
-// import 'package:flavorfile/pages/bookmark_page.dart';
+
 import 'package:flavorfile/pages/MyRecipeBookPages/my_recipes_page.dart';
-import 'package:flavorfile/pages/setting_page.dart';
+import 'package:flavorfile/pages/SettingsPages/setting_page.dart';
 import 'package:flavorfile/pages/ShareRecipePages/share_recipe_page.dart';
 import 'package:flavorfile/widgets/btm_navbar.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static List<Widget> pages = [
-    // const BookMarkPage(),
     const MyRecipePage(),
     const ShareRecipePage(),
     const SettingPage(),

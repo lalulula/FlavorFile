@@ -30,3 +30,19 @@ samples, guidance on mobile development, and a full API reference.
 - Background ->이미지 추가
   -Use Container -> BoxDecoration => image:DecorationImage fit BoxFit.cover
 - "CONTEXT"
+- ROUTES
+
+  ````routes: {
+   '/intro': (context) => const IntroPage(),
+   '/auth': (context) => const AuthPage(),
+   },```
+
+  ```class _IntroPageState extends State<IntroPage> {
+  @override
+  void initState() {
+  super.initState();
+  Timer(const Duration(seconds: 5), () {
+  Navigator.pushReplacementNamed(context, '/auth');
+  });
+  }```
+  ````

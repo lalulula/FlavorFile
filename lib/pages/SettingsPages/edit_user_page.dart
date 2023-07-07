@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class BookMarkPage extends StatelessWidget {
-  const BookMarkPage({super.key});
+class EditUserInfo extends StatelessWidget {
+  const EditUserInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Text("BookMarks"),
+      body: Text("edit userPage"),
     );
   }
 }

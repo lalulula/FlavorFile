@@ -15,3 +15,21 @@ Future<List<dynamic>> fetchUserRecipes() async {
 
   return userData['recipes'];
 }
+
+Future<Map<String, dynamic>?> fetchUserData() async {
+  final user = FirebaseAuth.instance.currentUser!;
+  final CollectionReference userCollection =
+      FirebaseFirestore.instance.collection('users');
+
+  try {
+    final snapshot = await userCollection.doc(user.uid).get();
+    if (snapshot.exists) {
+      final userData = snapshot.data() as Map<String, dynamic>;
+      return userData;
+    }
+  } catch (e) {
+    print('Error fetching user data: $e');
+  }
+
+  return null;
+}
