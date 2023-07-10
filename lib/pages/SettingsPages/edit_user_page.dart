@@ -95,7 +95,7 @@ class _EditUserInfoState extends State<EditUserInfo> {
                           const Text("사용자 이름", style: dataIndicatorStyle),
                           TextFormField(
                             controller: _userNameController,
-                            // decoration: const UnderlineInputBorder(),
+                            decoration: textFieldStyle,
                           ),
                           const Divider(thickness: 1),
                           Text("이메일", style: disabledDataIndicatorStyle),

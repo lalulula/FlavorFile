@@ -9,3 +9,6 @@ final disabledDataIndicatorStyle = TextStyle(
     fontWeight: FontWeight.bold, fontSize: 18, color: Colors.grey.shade400);
 final disabledDataTextStyle = TextStyle(
     fontWeight: FontWeight.w400, fontSize: 15, color: Colors.grey.shade400);
+final textFieldStyle = InputDecoration(
+    focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.indigo.shade300)));
