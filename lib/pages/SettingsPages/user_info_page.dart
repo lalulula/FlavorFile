@@ -1,9 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavorfile/pages/SettingsPages/settings_styles.dart';
 import 'package:flavorfile/services/user_services.dart';
 import 'package:flutter/material.dart';
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
   const UserInfo({super.key});
+
+  @override
+  State<UserInfo> createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
+  // final btnStyle = ButtonStyle(
+  //     backgroundColor: MaterialStatePropertyAll(Colors.grey.shade100));
+
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
   }
@@ -76,6 +86,7 @@ class UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
@@ -95,16 +106,54 @@ class UserInfo extends StatelessWidget {
                       final email = userData['email'];
                       final noRecipe = userData['recipes'].length;
                       return Column(children: [
-                        const Text("This is where the image is going to be"),
-                        Text(username),
-                        Text(email),
-                        Text(noRecipe.toString())
+                        const SizedBox(height: 30),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset(
+                            'assets/images/default_profile.jpg',
+                            height: 200,
+                            width: 200,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                            width: screenWidth * 3 / 4,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                    width: 3, color: Colors.grey.shade200)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text("사용자 이름",
+                                      style: dataIndicatorStyle),
+                                  const SizedBox(height: 5),
+                                  Text(username, style: dataTextStyle),
+                                  const Divider(thickness: 1),
+                                  const Text("이메일", style: dataIndicatorStyle),
+                                  const SizedBox(height: 5),
+                                  Text(email, style: dataTextStyle),
+                                  const Divider(thickness: 1),
+                                  const Text("레시피 개수",
+                                      style: dataIndicatorStyle),
+                                  const SizedBox(height: 5),
+                                  Text(noRecipe.toString(),
+                                      style: dataTextStyle)
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ]);
                     } else {
                       return const Text('No user data found.');
                     }
                   }),
               TextButton(
+                  style: btnStyle,
                   onPressed: () => _logoutDialogBuilder(context),
                   child: Text(
                     "로그아웃",
@@ -114,6 +163,7 @@ class UserInfo extends StatelessWidget {
                         color: Colors.black),
                   )),
               TextButton(
+                  style: btnStyle,
                   onPressed: () {
                     print("회원탈퇴");
                   },
