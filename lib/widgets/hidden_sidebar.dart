@@ -37,13 +37,13 @@ class _HiddenSideBarState extends State<HiddenSideBar> {
               selectedStyle: selectedTextStyle,
               colorLineSelected: Colors.indigo),
           const UserInfo()),
-      ScreenHiddenDrawer(
-          ItemHiddenMenu(
-              name: "레시피 북 수정",
-              baseStyle: baseTextStyle,
-              selectedStyle: selectedTextStyle,
-              colorLineSelected: Colors.indigo),
-          const EditRecipeBook()),
+      // ScreenHiddenDrawer(
+      //     ItemHiddenMenu(
+      //         name: "레시피 북 수정",
+      //         baseStyle: baseTextStyle,
+      //         selectedStyle: selectedTextStyle,
+      //         colorLineSelected: Colors.indigo),
+      //     const EditRecipeBook()),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
               name: "사용자 정보 수정",
