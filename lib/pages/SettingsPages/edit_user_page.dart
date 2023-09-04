@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flavorfile/pages/SettingsPages/settings_styles.dart';
 import 'package:flavorfile/services/user_services.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditUserInfo extends StatefulWidget {
   const EditUserInfo({Key? key}) : super(key: key);
@@ -35,6 +37,27 @@ class _EditUserInfoState extends State<EditUserInfo> {
     } catch (error) {
       print('Error: $error');
     }
+  }
+
+  String imageURL = "";
+  final bool _showUploadingDialoge = false;
+  Future<void> _selectAndUploadImage() async {
+    print("Selecting user profile image");
+    ImagePicker imagePicker = ImagePicker();
+    XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+    print('${file?.path}');
+    if (file == null) {
+      print("no image selected");
+      return;
+    }
+    String uniqueFileName =
+        'UserProfileImage_${DateTime.now().millisecondsSinceEpoch.toString()}';
+    try {
+      //Getting reference to the root of Firebase Storage
+      Reference referenceRoot = FirebaseStorage.instance.ref();
+      //Get reference to the directory where I want to store the image
+      Reference referenceDirImages = referenceRoot.child('profile_images');
+    } catch (e) {}
   }
 
   void _editUserInfo() {
@@ -73,10 +96,13 @@ class _EditUserInfoState extends State<EditUserInfo> {
                 const SizedBox(height: 30),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/default_profile.jpg',
-                    height: 200,
-                    width: 200,
+                  child: GestureDetector(
+                    onTap: _selectAndUploadImage,
+                    child: Image.asset(
+                      'assets/images/default_profile.jpg',
+                      height: 200,
+                      width: 200,
+                    ),
                   ),
                 ),
                 Padding(

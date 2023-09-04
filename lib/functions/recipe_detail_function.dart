@@ -160,7 +160,7 @@ Future<void> dialogBuilder(BuildContext context, recipeData) {
     builder: (BuildContext context) {
       return Dialog(
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -175,99 +175,102 @@ Future<void> dialogBuilder(BuildContext context, recipeData) {
                       .copyWith(fontSize: 20, fontWeight: FontWeight.normal),
                 ),
               ),
-              SizedBox(
-                height: 400,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    Center(
-                      child: Table(
-                        columnWidths: const {
-                          0: FlexColumnWidth(1),
-                          1: FlexColumnWidth(1),
-                        },
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.middle,
+              recipeData['ingredients'].isEmpty
+                  ? const Text("재료를 추가해보세요!")
+                  : SizedBox(
+                      height: 400,
+                      child: ListView(
+                        shrinkWrap: true,
                         children: [
-                          TableRow(
-                            children: [
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '재료',
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    '용량',
-                                    textAlign: TextAlign.center,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyLarge!
-                                        .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          for (var index = 0;
-                              index < recipeData['ingredients'].length;
-                              index++)
-                            TableRow(
+                          Center(
+                            child: Table(
+                              columnWidths: const {
+                                0: FlexColumnWidth(1),
+                                1: FlexColumnWidth(1),
+                              },
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.middle,
                               children: [
-                                TableCell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                        textAlign: TextAlign.center,
-                                        '${recipeData['ingredients'][index]['ingredient']}',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .copyWith(fontSize: 25)),
-                                  ),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          '재료',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 20,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          '용량',
+                                          textAlign: TextAlign.center,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge!
+                                              .copyWith(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 20,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                TableCell(
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: recipeData['ingredients'][index]
-                                                  ['amount'] ==
-                                              ""
-                                          ? const Text(
-                                              "-",
+                                for (var index = 0;
+                                    index < recipeData['ingredients'].length;
+                                    index++)
+                                  TableRow(
+                                    children: [
+                                      TableCell(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
                                               textAlign: TextAlign.center,
-                                            )
-                                          : Text(
-                                              textAlign: TextAlign.center,
-                                              '${recipeData['ingredients'][index]['amount']}',
+                                              '${recipeData['ingredients'][index]['ingredient']}',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .bodyLarge!
-                                                  .copyWith(fontSize: 25))),
-                                ),
+                                                  .copyWith(fontSize: 20)),
+                                        ),
+                                      ),
+                                      TableCell(
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: recipeData['ingredients']
+                                                        [index]['amount'] ==
+                                                    ""
+                                                ? const Text(
+                                                    "-",
+                                                    textAlign: TextAlign.center,
+                                                  )
+                                                : Text(
+                                                    textAlign: TextAlign.center,
+                                                    '${recipeData['ingredients'][index]['amount']}',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyLarge!
+                                                        .copyWith(
+                                                            fontSize: 20))),
+                                      ),
+                                    ],
+                                  ),
                               ],
                             ),
+                          ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

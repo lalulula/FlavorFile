@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flavorfile/pages/MyRecipeBookPages/styles.dart';
 import 'package:flavorfile/widgets/custom_appbar.dart';
 import 'package:flavorfile/class/ingredients.dart';
 import 'package:flutter/material.dart';
@@ -192,15 +193,18 @@ class _EditRecipePageState extends State<EditRecipePage> {
             child: Column(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomAppBar(),
+                const CustomAppBar(
+                  returnPage: '레시피 정보',
+                ),
                 const SizedBox(height: 20),
                 Center(
                   child: SizedBox(
                     width: 250,
                     child: TextField(
                       controller: _recipeNameController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "레시피 이름",
+                        focusedBorder: focusedBorderStyle,
                       ),
                     ),
                   ),
@@ -242,8 +246,9 @@ class _EditRecipePageState extends State<EditRecipePage> {
                             onChanged: (value) {
                               _ingredientsList[index].ingredient = value;
                             },
-                            decoration: const InputDecoration(
-                              labelText: "재료",
+                            decoration: InputDecoration(
+                              hintText: "재료",
+                              focusedBorder: focusedBorderStyle,
                             ),
                           ),
                         ),
@@ -255,8 +260,10 @@ class _EditRecipePageState extends State<EditRecipePage> {
                               onChanged: (value) {
                                 _ingredientsList[index].amount = value;
                               },
-                              decoration:
-                                  const InputDecoration(labelText: "용량"),
+                              decoration: InputDecoration(
+                                hintText: "용량",
+                                focusedBorder: focusedBorderStyle,
+                              ),
                             )),
                         IconButton(
                             onPressed: () {
@@ -305,7 +312,10 @@ class _EditRecipePageState extends State<EditRecipePage> {
                               onChanged: (value) {
                                 _howToList[index] = value;
                               },
-                              decoration: const InputDecoration(labelText: ""),
+                              decoration: InputDecoration(
+                                labelText: "",
+                                focusedBorder: focusedBorderStyle,
+                              ),
                             ),
                           ),
                           IconButton(

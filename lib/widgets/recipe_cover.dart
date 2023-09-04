@@ -39,11 +39,11 @@ class _RecipeCoverState extends State<RecipeCover> {
                   ? DecorationImage(
                       image: NetworkImage(widget.recipeData['recipeImage'][0]),
                       fit: BoxFit.cover,
-                      opacity: 0.5)
+                      opacity: 0.2)
                   : const DecorationImage(
                       image: AssetImage('assets/images/linenote.jpg'),
                       fit: BoxFit.cover,
-                      opacity: 0.5),
+                      opacity: 1),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(width: 3, color: Colors.black12),
             ),
@@ -51,14 +51,19 @@ class _RecipeCoverState extends State<RecipeCover> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
-                Text(
-                  widget.recipeData['recipeName'],
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(fontSize: 40, fontWeight: FontWeight.w500),
-                ),
+                widget.recipeData['recipeName'] == ""
+                    ? Text(
+                        "레시피 이름없음",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 38, fontWeight: FontWeight.w500),
+                      )
+                    : Text(
+                        widget.recipeData['recipeName'],
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontSize: 40, fontWeight: FontWeight.w500),
+                      ),
                 const SizedBox(height: 10),
                 Text(
                   '총 재료 ${widget.recipeData['ingredients'].length}개',

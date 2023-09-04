@@ -21,7 +21,7 @@ class CustomButtons extends StatelessWidget {
           child: Text(buttonName,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 15,
                   ))),
     );

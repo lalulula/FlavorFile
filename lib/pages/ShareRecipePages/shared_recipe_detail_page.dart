@@ -1,3 +1,4 @@
+import 'package:flavorfile/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -99,7 +100,12 @@ class _SharedRecipeDetailsState extends State<SharedRecipeDetails> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const CustomAppBar(
+                  returnPage: '다른 메뉴',
+                ),
+                const SizedBox(height: 20),
                 Text(widget.sharedRecipeData["name"]),
+                const SizedBox(height: 20),
                 if (showVideo && _videoController != null)
                   Center(
                     child: InkWell(

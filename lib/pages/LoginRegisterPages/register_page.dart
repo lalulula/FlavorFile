@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavorfile/services/auth_service.dart';
 import 'package:flavorfile/widgets/custom_buttons.dart';
+import 'package:flavorfile/widgets/other_auth_btn.dart';
 import 'package:flavorfile/widgets/square_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -211,16 +213,11 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SquareTile(imagePath: 'assets/images/kakaotalk.png'),
-                SizedBox(width: 10),
-                SquareTile(imagePath: 'assets/images/google.png'),
-                SizedBox(width: 10),
-                SquareTile(imagePath: 'assets/images/applelogo.png'),
-              ],
-            ),
+            OtherAuthentication(
+                screenWidth: screenWidth,
+                imagePath: 'assets/images/google.png',
+                btnText: "Gmail로 로그인하기",
+                authFunction: () => GoogleAuthService().signInWithGoogle()),
             const SizedBox(height: 10),
             const SizedBox(height: 20),
             GestureDetector(

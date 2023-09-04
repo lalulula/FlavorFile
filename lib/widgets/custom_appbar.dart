@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
+    required this.returnPage,
   });
-
+  final String returnPage;
   @override
   Widget build(BuildContext context) {
     return Container(

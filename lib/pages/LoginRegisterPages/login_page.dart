@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfile/pages/LoginRegisterPages/forgot_pwd_page.dart';
 import 'package:flavorfile/pages/LoginRegisterPages/register_page.dart';
+import 'package:flavorfile/services/auth_service.dart';
 import 'package:flavorfile/widgets/custom_buttons.dart';
+import 'package:flavorfile/widgets/other_auth_btn.dart';
 import 'package:flavorfile/widgets/square_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -209,16 +211,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SquareTile(imagePath: 'assets/images/kakaotalk.png'),
-                    SizedBox(width: 10),
-                    SquareTile(imagePath: 'assets/images/google.png'),
-                    SizedBox(width: 10),
-                    SquareTile(imagePath: 'assets/images/applelogo.png'),
-                  ],
-                ),
+                OtherAuthentication(
+                    screenWidth: screenWidth,
+                    imagePath: 'assets/images/google.png',
+                    btnText: "Gmail로 로그인하기",
+                    authFunction: () => GoogleAuthService().signInWithGoogle()),
                 const SizedBox(height: 10),
                 const SizedBox(height: 20),
                 GestureDetector(
