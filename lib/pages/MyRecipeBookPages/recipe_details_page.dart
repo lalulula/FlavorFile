@@ -160,77 +160,80 @@ class _RecipeDetailPageState extends State<RecipeDetailPage> {
                 ),
               ),
               //RECIPE CONTENTS
-              Column(
-                children: [
-                  const SizedBox(height: 15),
-                  widget.recipeData['recipeName'] == ""
-                      ? const Text("레시피 이름을 입력하세요")
-                      : Text(
-                          widget.recipeData['recipeName'],
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyLarge!
-                              .copyWith(
-                                  fontSize: 30, fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                  const SizedBox(height: 10),
-                  recipeImages.isEmpty
-                      ? const Text("레시피 수정하기로 완성된 음식사진을 올려보세요!")
-                      : SizedBox(
-                          height: 300,
-                          child: PageView.builder(
-                            itemCount: recipeImages.length,
-                            pageSnapping: true,
-                            controller: _pageController,
-                            onPageChanged: (index) {
-                              setState(() {
-                                _currentPage = index;
-                              });
-                            },
-                            itemBuilder: (context, index) {
-                              final image = recipeImages[index];
-                              bool active = index == _currentPage;
-                              return imageSlider(image, _currentPage, active,
-                                  index, widget.recipeId);
-                            },
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    widget.recipeData['recipeName'] == ""
+                        ? const Text("레시피 이름을 입력하세요")
+                        : Text(
+                            widget.recipeData['recipeName'],
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge!
+                                .copyWith(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                        imageIndicators(recipeImages.length, _currentPage),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                      onTap: () => dialogBuilder(context, widget.recipeData),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        child: const Text("재료 확인하기",
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15)),
-                      )),
-                  const SizedBox(height: 20),
-                  widget.recipeData["order"].isEmpty
-                      ? const Text("레시피 순서를 추가해보세요!")
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for (final recipe
-                                in widget.recipeData['order'].asMap().entries)
-                              Text(
-                                '${recipe.key + 1}. ${recipe.value}\n',
-                                style: const TextStyle(fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
-                          ],
-                        ),
-                ],
+                    const SizedBox(height: 10),
+                    recipeImages.isEmpty
+                        ? const Text("레시피 수정하기로 완성된 음식사진을 올려보세요!")
+                        : SizedBox(
+                            height: 300,
+                            child: PageView.builder(
+                              itemCount: recipeImages.length,
+                              pageSnapping: true,
+                              controller: _pageController,
+                              onPageChanged: (index) {
+                                setState(() {
+                                  _currentPage = index;
+                                });
+                              },
+                              itemBuilder: (context, index) {
+                                final image = recipeImages[index];
+                                bool active = index == _currentPage;
+                                return imageSlider(image, _currentPage, active,
+                                    index, widget.recipeId);
+                              },
+                            ),
+                          ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:
+                          imageIndicators(recipeImages.length, _currentPage),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                        onTap: () => dialogBuilder(context, widget.recipeData),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          child: const Text("재료 확인하기",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 15)),
+                        )),
+                    const SizedBox(height: 20),
+                    widget.recipeData["order"].isEmpty
+                        ? const Text("레시피 순서를 추가해보세요!")
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (final recipe
+                                  in widget.recipeData['order'].asMap().entries)
+                                Text(
+                                  '${recipe.key + 1}. ${recipe.value}\n',
+                                  style: const TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.left,
+                                ),
+                            ],
+                          ),
+                  ],
+                ),
               ),
             ],
           ),

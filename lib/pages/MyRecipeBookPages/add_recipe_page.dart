@@ -319,7 +319,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
                                 _howToList[index] = value;
                               },
                               decoration: InputDecoration(
-                                hintText: 'Step $index',
+                                hintText: 'Step ${index + 1}',
                                 focusedBorder: focusedBorderStyle,
                               ),
                             ),

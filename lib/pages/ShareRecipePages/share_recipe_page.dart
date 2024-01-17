@@ -41,7 +41,7 @@ class _ShareRecipePageState extends State<ShareRecipePage> {
                 slivers: [
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 100, 0, 0),
                       child: Align(
                           alignment: Alignment.topLeft,
                           child: Column(
@@ -68,7 +68,6 @@ class _ShareRecipePageState extends State<ShareRecipePage> {
                           cardBuilder: (context, index, percentThresholdX,
                               percentThresholdY) {
                             final recipe = recipes[index];
-                            // print(recipe);
                             final title = recipe['name'];
                             final thumbNail = recipe['thumbnail_url'];
                             return GestureDetector(
@@ -84,9 +83,9 @@ class _ShareRecipePageState extends State<ShareRecipePage> {
                                 tag: recipe['id'],
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(5),
                                       border: Border.all(
-                                          width: 4,
+                                          width: 1,
                                           color: Colors.grey.shade300),
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -114,7 +113,7 @@ class _ShareRecipePageState extends State<ShareRecipePage> {
                                                   .textTheme
                                                   .bodySmall!
                                                   .copyWith(
-                                                      fontSize: 30,
+                                                      fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       color: Colors.black)),

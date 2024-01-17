@@ -21,11 +21,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
   late bool _passwordObscure;
+  late bool _incorrectPassword = false;
+  late String _wrongPasswordMessage = "";
+  late String _wrongEmailMessage = "";
 
   @override
   void initState() {
     super.initState();
     _passwordObscure = true;
+    _incorrectPassword = false;
+    _wrongPasswordMessage = "";
+    _wrongEmailMessage = "";
   }
 
   Future<void> login() async {
@@ -43,30 +49,25 @@ class _LoginPageState extends State<LoginPage> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print("user not found");
+        setState(() {
+          _incorrectPassword = true;
+          _wrongEmailMessage = "이메일이 존재하지 않습니다";
+        });
       } else if (e.code == 'wrong-password') {
-        print('wrong password');
+        setState(() {
+          _incorrectPassword = true;
+          _wrongPasswordMessage = "비밀번호가 일치하지 않습니다";
+        });
       }
     }
     Navigator.pop(context);
   }
 
   Future<void> showRegisterDialog(BuildContext context) async {
-    await showGeneralDialog(
-      context: context,
-      barrierDismissible: true,
-      barrierLabel: "Register",
-      pageBuilder: (BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation) {
-        return AlertDialog(
-          scrollable: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
-          contentPadding: EdgeInsets.zero,
-          content: const RegisterPage(),
-        );
-      },
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RegisterPage(),
+      ),
     );
   }
 
@@ -112,6 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   width: screenWidth * 3 / 4,
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        _wrongEmailMessage = "";
+                        _incorrectPassword = false;
+                      });
+                    },
                     controller: _emailController,
                     decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
@@ -131,6 +138,12 @@ class _LoginPageState extends State<LoginPage> {
                   width: screenWidth * 3 / 4,
                   child: TextField(
                     controller: _pwdController,
+                    onChanged: (value) {
+                      setState(() {
+                        _incorrectPassword = false;
+                        _wrongPasswordMessage = "";
+                      });
+                    },
                     obscureText: _passwordObscure,
                     decoration: InputDecoration(
                       enabledBorder: const OutlineInputBorder(
@@ -156,6 +169,21 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
+                if (_incorrectPassword)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 50, 0),
+                        child: (_wrongEmailMessage != ""
+                            ? Text(
+                                _wrongEmailMessage,
+                                style: const TextStyle(color: Colors.red),
+                              )
+                            : Text(
+                                _wrongPasswordMessage,
+                                style: const TextStyle(color: Colors.red),
+                              ))),
+                  ),
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
@@ -215,7 +243,8 @@ class _LoginPageState extends State<LoginPage> {
                     screenWidth: screenWidth,
                     imagePath: 'assets/images/google.png',
                     btnText: "Gmail로 로그인하기",
-                    authFunction: () => GoogleAuthService().signInWithGoogle()),
+                    authFunction: () =>
+                        GoogleAuthService().signInWithGoogle(context)),
                 const SizedBox(height: 10),
                 const SizedBox(height: 20),
                 GestureDetector(

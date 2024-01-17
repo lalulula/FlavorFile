@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flavorfile/pages/SettingsPages/settings_styles.dart';
+import 'package:flavorfile/render/auth_page.dart';
 import 'package:flavorfile/services/user_services.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +64,13 @@ class _UserInfoState extends State<UserInfo> {
                       TextButton(
                           onPressed: () async {
                             await logout();
-                            Navigator.of(context).pop();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AuthPage(), // Replace with your landing page
+                              ),
+                            );
                           },
                           child: Text(
                             "로그아웃",
@@ -162,18 +169,18 @@ class _UserInfoState extends State<UserInfo> {
                         fontWeight: FontWeight.w400,
                         color: Colors.black),
                   )),
-              TextButton(
-                  style: btnStyle,
-                  onPressed: () {
-                    print("회원탈퇴");
-                  },
-                  child: Text(
-                    "회원탈퇴하기",
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  )),
+              // TextButton(
+              //     style: btnStyle,
+              //     onPressed: () {
+              //       print("회원탈퇴");
+              //     },
+              //     child: Text(
+              //       "회원탈퇴하기",
+              //       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.w400,
+              //           color: Colors.black),
+              //     )),
             ],
           ),
         ),

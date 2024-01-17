@@ -1,4 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flavorfile/render/auth_page.dart';
+import 'package:flavorfile/render/home_page.dart';
 import 'package:flutter/material.dart';
 
 class Logout extends StatelessWidget {
@@ -52,7 +56,14 @@ class Logout extends StatelessWidget {
                       TextButton(
                           onPressed: () async {
                             await logout();
-                            Navigator.of(context).pop();
+                            //   Navigator.of(context).pop();
+                            // },
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AuthPage()),
+                              (route) => false,
+                            );
                           },
                           child: Text(
                             "로그아웃",
